@@ -96,7 +96,7 @@ func main() {
 	fmt.Printf("IntStringMap from Json: %v\n",m)
 	fmt.Println("m[1]",m[1],"m[2]",m[2])
 
-	fmt.Println("test git")
+	fmt.Println("test git1")
 
 }
 // --- interface
