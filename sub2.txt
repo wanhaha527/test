@@ -1,3 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 2
 >>>>>>> feature/feat2
+=======
+修复bug完成
+>>>>>>> hotfix/patch1
