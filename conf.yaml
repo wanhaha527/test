@@ -1,0 +1,6 @@
+root: root
+password: wang5272357
+localhost: 127.0.0.1
+port: 3306
+database: demo
+charset: utf8mb4

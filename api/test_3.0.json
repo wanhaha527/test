@@ -1,0 +1,262 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "UserService",
+    "description": "Resource for managing Users",
+    "contact": {
+      "name": "john",
+      "url": "http://johndoe.org",
+      "email": "john@doe.rp"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://mit.org"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Managing users"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get all users",
+        "operationId": "findAllUsers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/main.User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/main.User"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/main.User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/main.User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "create a user",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/main.User"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/main.User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/{user-id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get a user",
+        "operationId": "findUser",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "path",
+            "description": "identifier of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/main.User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/main.User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "default": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/main.User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/main.User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "update a user",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "path",
+            "description": "identifier of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/main.User"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/main.User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "delete a user",
+        "operationId": "removeUser",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "path",
+            "description": "identifier of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "main.User": {
+        "required": [
+          "age",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "integer",
+            "description": "age of the user",
+            "format": "int32",
+            "default": 23
+          },
+          "id": {
+            "type": "string",
+            "description": "identifier of the user"
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the user",
+            "default": "john"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Resource for managing Users",
+    "title": "UserService",
+    "contact": {
+      "name": "wangaiqin",
+      "url": "https://wangaiqin.com",
+      "email": "aiqin.wang@changhong.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://mit.org"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "consumes": [
+          "application/xml",
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "get all users",
+        "operationId": "FindAllUsers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/main.User"
+              }
+            }
+          },
+          "default": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/main.User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/add": {
+      "post": {
+        "consumes": [
+          "application/xml",
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "create a user",
+        "operationId": "CreateUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/main.User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/add/{user-id}": {
+      "post": {
+        "consumes": [
+          "application/xml",
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "create a user by id",
+        "operationId": "CreateUserById",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "identifier of the user",
+            "name": "user-id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/main.User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/{user-id}": {
+      "get": {
+        "consumes": [
+          "application/xml",
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "get a user",
+        "operationId": "FindUser",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "identifier of the user",
+            "name": "user-id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/main.User"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/main.User"
+            }
+          }
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/xml",
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "update a user",
+        "operationId": "UpdateUser",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "identifier of the user",
+            "name": "user-id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/main.User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/xml",
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "delete a user",
+        "operationId": "RemoveUser",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "identifier of the user",
+            "name": "user-id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "main.User": {
+      "required": [
+        "id",
+        "name",
+        "age",
+        "gender",
+        "grade",
+        "address"
+      ],
+      "properties": {
+        "address": {
+          "description": "address of the user",
+          "type": "string"
+        },
+        "age": {
+          "description": "age of the user",
+          "type": "integer",
+          "format": "int32",
+          "default": 0
+        },
+        "gender": {
+          "description": "gender of the user",
+          "type": "string"
+        },
+        "grade": {
+          "description": "grade of the user",
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "description": "identifier of the user",
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "description": "name of the user",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Managing users",
+      "name": "users"
+    }
+  ]
+}
