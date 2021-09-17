@@ -177,10 +177,26 @@ func  CreateUserById(request *restful.Request, response *restful.Response) {
 	*/
 }
 
+// DELETE http://localhost:8080/users/
+//删除尾行用户
+func  RemoveUser(request *restful.Request, response *restful.Response) {
+	stmt,_:=Mysqldb.Prepare(`delete from user_test order by id desc limit 1`)
+	defer stmt.Close()
+	//const Id=19
+	_,err:=stmt.Exec()
+	if err!=nil {
+		fmt.Println("尾行删除失败")
+		io.WriteString(response.ResponseWriter,"尾行删除失败")
+	}else{
+		fmt.Printf("尾行删除成功\n")
+		io.WriteString(response.ResponseWriter,"尾行删除成功")
+	}
+}
+
 // DELETE http://localhost:8080/users/1
 //根据id删除用户
 
-func  RemoveUser(request *restful.Request, response *restful.Response) {
+func  RemoveUserById(request *restful.Request, response *restful.Response) {
 	id := request.PathParameter("user-id")
 	//delete(u.users, id)//map[id]User
 	stmt,_:=Mysqldb.Prepare(`delete from user_test where id=?`)

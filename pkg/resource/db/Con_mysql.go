@@ -13,7 +13,7 @@ var err error
 const (
 	root="root"
 	password="wang5272357"
-	localhost="172.25.208.1"//"mysqlServiceHost"//"172.17.0.1"////"172.17.0.1""host.docker.internal"
+	localhost="localhost"//"mysqlServiceHost"//"172.17.0.1"////"172.17.0.1""host.docker.internal"
 	port="3306"
 	database="demo"
 	charset="utf8mb4"

@@ -101,12 +101,19 @@ func (u UserResource) WebService() *restful.WebService {
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Reads(User{})) // from the request
 
-	ws.Route(ws.DELETE("/{user-id}").To(db.RemoveUser).
+	ws.Route(ws.DELETE("/{user-id}").To(db.RemoveUserById).
 		// docs
 		Doc("delete a user").
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Param(ws.PathParameter("user-id", "identifier of the user").DataType("string")))
 
+	ws.Route(ws.DELETE("/").To(db.RemoveUser).
+		// docs
+		Doc("delete tail user").
+		Metadata(restfulspec.KeyOpenAPITags, tags).
+		Writes([]User{}).//ws.Route.Writes生成path.operation.responses.default
+		Returns(200, "OK", []User{}).//生成responses对应的状态码的返回。三个参数分别对应状态码，description，schema
+		DefaultReturns("Remove OK", []User{}))
 	return ws
 }
 
